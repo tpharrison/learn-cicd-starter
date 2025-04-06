@@ -29,7 +29,7 @@ func TestGetAPIKey(t *testing.T) {
 			name:          "Malformed header - wrong scheme",
 			headers:       http.Header{"Authorization": []string{"Bearer something"}},
 			expectedKey:   "",
-			expectedError: errors.New("perfect authorization header"),
+			expectedError: errors.New("malformed authorization header"),
 		},
 		{
 			name:          "Malformed header - incomplete value",
@@ -40,7 +40,7 @@ func TestGetAPIKey(t *testing.T) {
 		{
 			name:          "Malformed header - empty value",
 			headers:       http.Header{"Authorization": []string{""}},
-			expectedKey:   "",
+			expectedKey:   "FAIL",
 			expectedError: ErrNoAuthHeaderIncluded,
 		},
 	}
